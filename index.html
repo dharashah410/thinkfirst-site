@@ -255,7 +255,6 @@ footer{border-top:1px solid var(--line);margin-top:28px;padding:22px 0 44px;disp
         var e=g[k]||{};var a=document.createElement("a");a.className="btn";a.innerHTML=ICON;a.appendChild(document.createTextNode(label[k]+(e.size?" ("+e.size+")":"")));
         if(e.url){a.href=e.url;a.addEventListener("click",function(){counted(box.getAttribute("data-group"),k);});}else{a.setAttribute("aria-disabled","true");a.href="#";a.innerHTML=ICON;a.appendChild(document.createTextNode(label[k]+": coming soon"));}
         box.appendChild(a);
-        if(e.sha256){var s=document.createElement("div");s.innerHTML="<small>sha256: "+e.sha256+"</small>";box.appendChild(s);}
       });
     });
   }).catch(function(){});
