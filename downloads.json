@@ -1,20 +1,20 @@
 {
-  "note": "Filled in when the installers are published (see docs/hosting.md). A null url shows 'Coming soon' on the page. The sizes are estimates (the app is about 15 MB; carrying Codex adds about 115 MB) until the first release is built.",
+  "note": "Filled in by the release workflow for v0.1.0. A null url shows \"Coming soon\" on the page.",
   "app": {
     "macos-arm64": {
-      "url": null,
-      "sha256": null,
-      "size": "about 120 MB"
+      "url": "https://github.com/dharashah410/thinkfirst-site/releases/download/v0.1.0/ThinkFirst-app-macos-arm64-0.1.0.zip",
+      "sha256": "5c413e42fd8214bb3a88db8b9d8911794cffe835cfd1704227b8f98475a8060d",
+      "size": "about 119 MB"
     },
     "macos-x64": {
-      "url": null,
-      "sha256": null,
-      "size": "about 120 MB"
+      "url": "https://github.com/dharashah410/thinkfirst-site/releases/download/v0.1.0/ThinkFirst-app-macos-x64-0.1.0.zip",
+      "sha256": "f50405e312021cfb9765f40b1f4756375498b8f6c72e9f299ef4a113f764465a",
+      "size": "about 129 MB"
     },
     "windows-x64": {
-      "url": null,
-      "sha256": null,
-      "size": "about 120 MB"
+      "url": "https://github.com/dharashah410/thinkfirst-site/releases/download/v0.1.0/ThinkFirst-app-windows-x64-0.1.0.zip",
+      "sha256": "a2b31c2e4ddf47238871d9e5aad4a12d8e4ed4fb4943ce072f106d8fe3bf9120",
+      "size": "about 100 MB"
     }
   }
 }
