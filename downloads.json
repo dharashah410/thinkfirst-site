@@ -1,0 +1,20 @@
+{
+  "note": "Filled in when the installers are published (see docs/hosting.md). A null url shows 'Coming soon' on the page. The sizes are estimates (the app is about 15 MB; carrying Codex adds about 115 MB) until the first release is built.",
+  "app": {
+    "macos-arm64": {
+      "url": null,
+      "sha256": null,
+      "size": "about 120 MB"
+    },
+    "macos-x64": {
+      "url": null,
+      "sha256": null,
+      "size": "about 120 MB"
+    },
+    "windows-x64": {
+      "url": null,
+      "sha256": null,
+      "size": "about 120 MB"
+    }
+  }
+}

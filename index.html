@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ThinkFirst: decide together what AI may do for your child</title>
+<meta name="description" content="ThinkFirst turns a family conversation into rules the app enforces in its own chat. A free beta for Mac and Windows, for children aged 6 to 18.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<style>
+:root{--bg:#f4f8ff;--surface:#fff;--ink:#1c2540;--muted:#46557a;--line:#ccd8ee;--accent:#2456c8;--accent-ink:#fff;--accent-soft:#e4eeff;--sun:#ffb800;--sun-ink:#2b2100;--sun-soft:#fff0c4;--sky-soft:#dbe8ff;--coral-soft:#ffe1d9;--blob-sky:#c4d8ff;--blob-sun:#ffe08a;--blob-green:#d3d9ff;--blob-coral:#ffc6b8;--ok:#1b7a43;--ok-soft:#dff3e5;--warn:#8a5600;--warn-soft:#fff0c9;--stop:#a82a2a;--stop-soft:#fbe2df;--focus:#1d4ed8;--kid-bg:#eaf2ff;--kid-line:#a9bde6;--kid-soft:#d6e4ff}
+@media (prefers-color-scheme:dark){:root{--bg:#0d1426;--surface:#151e36;--ink:#e6ecfb;--muted:#a3b0d1;--line:#2a3a63;--accent:#7ea2ff;--accent-ink:#0a1330;--accent-soft:#1a2a55;--sun:#ffc533;--sun-soft:#3a3012;--sky-soft:#14284a;--coral-soft:#3d1f1a;--blob-sky:#2a4a9a;--blob-sun:#6b5514;--blob-green:#3a3f8f;--blob-coral:#6b3228;--ok:#74d19b;--ok-soft:#173226;--warn:#e7b04d;--warn-soft:#352a14;--stop:#f29393;--stop-soft:#3b1e1e;--focus:#ffc533;--kid-bg:#0a1633;--kid-line:#34508c;--kid-soft:#1f3366;color-scheme:dark}}
+*{box-sizing:border-box}a[href],button:not(:disabled){cursor:pointer}a[aria-disabled="true"]{cursor:default}
+html{scroll-behavior:smooth}@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important}}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 Inter,system-ui,-apple-system,"Segoe UI",sans-serif;overflow-x:hidden}
+h1,h2,h3{font-family:"Space Grotesk",system-ui,sans-serif;line-height:1.15;margin:0}a{color:var(--accent)}:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:4px}
+.L{fill:none;stroke:var(--ink);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+svg.ic{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+header.top{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:14px 0;position:relative;z-index:2}
+header.top .name{font:700 1.25rem "Space Grotesk",system-ui,sans-serif;display:flex;align-items:center;gap:10px;color:var(--ink);text-decoration:none}
+header.top nav{margin-left:auto;display:flex;gap:6px;flex-wrap:wrap;align-items:center}header.top nav a{color:var(--ink);text-decoration:none;font-weight:500;padding:8px 12px;border-radius:999px}header.top nav a:hover{background:var(--accent-soft)}
+header.top nav a.cta{background:var(--accent);color:var(--accent-ink);font-weight:600}header.top nav a.cta:hover{background:var(--accent)}
+.btn{display:inline-flex;align-items:center;gap:8px;margin:4px 8px 4px 0;min-height:46px;padding:10px 20px;border-radius:12px;border:1px solid var(--accent);background:var(--accent);color:var(--accent-ink);text-decoration:none;font-weight:600}
+.btn.sun{background:var(--sun);border-color:var(--sun);color:var(--sun-ink)}.btn.ghost{background:var(--surface);color:var(--accent)}
+.btn[aria-disabled="true"]{background:transparent;color:var(--muted);border-color:var(--line);pointer-events:none}
+.badge{display:inline-flex;align-items:center;gap:6px;background:var(--sun-soft);border:1px solid var(--sun);border-radius:999px;padding:4px 14px;font-size:.85rem;font-weight:600;margin-bottom:16px}
+.hero{position:relative;padding:28px 0 36px;display:grid;gap:20px;grid-template-columns:1.05fr .95fr;align-items:center}
+.hero h1{font-size:clamp(2.2rem,5.4vw,3.4rem);letter-spacing:-.015em}.hero h1 em{font-style:normal;color:var(--accent);background:linear-gradient(transparent 62%,var(--sun) 62%,var(--sun) 92%,transparent 92%)}
+.hero p.lead{font-size:1.15rem;color:var(--muted);margin:16px 0 22px;max-width:30em}
+.art{position:relative;aspect-ratio:1/.92;width:100%;max-width:470px;margin:0 auto}.art svg.bg{position:absolute;inset:0;width:100%;height:100%}
+.art .face{position:absolute;left:50%;top:50%;width:46%;transform:translate(-50%,-50%);filter:drop-shadow(0 10px 18px rgba(36,86,200,.25))}
+.chip{position:absolute;display:grid;place-items:center;width:20%;aspect-ratio:1;border-radius:22px;background:var(--surface);border:2px solid var(--line);box-shadow:0 6px 14px rgba(28,37,64,.12);animation:bob 5s ease-in-out infinite}
+.chip svg{width:78%;height:78%}.chip.c1{left:3%;top:8%}.chip.c2{right:2%;top:2%;animation-delay:-1.5s}.chip.c3{left:0;bottom:12%;animation-delay:-3s}.chip.c4{right:4%;bottom:6%;animation-delay:-2.2s}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-9px) rotate(2deg)}}
+section{padding:36px 0}section>.wrap>h2,section>h2{font-size:clamp(1.55rem,3.4vw,2.1rem);margin-bottom:8px}section .intro{color:var(--muted);margin:0 0 22px;max-width:40em;font-size:1.05rem}
+.band{background:var(--sky-soft);border-radius:28px;margin:0 -8px;padding:32px 28px}
+.pic{width:64px;height:64px;flex:none}.pic.lg{width:84px;height:84px}
+.tiles{display:grid;gap:16px;grid-template-columns:repeat(3,1fr)}
+.tile{display:flex;gap:16px;align-items:center;background:var(--surface);border:2px solid var(--line);border-radius:20px;padding:16px}.tile b{display:block;font-size:1.05rem;line-height:1.3}.tile span{color:var(--muted);font-size:.93rem}
+.steps{display:grid;gap:16px;grid-template-columns:repeat(3,1fr);list-style:none;margin:0;padding:0;counter-reset:s}
+.steps li{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:22px 20px;counter-increment:s}
+.steps li::after{content:counter(s);position:absolute;right:16px;top:14px;display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:var(--accent);color:var(--accent-ink);font-weight:700}
+.steps h3{font-size:1.15rem;margin:10px 0 4px}.steps p{margin:0;color:var(--muted)}
+.shots{display:grid;gap:22px;grid-template-columns:1.1fr .9fr;align-items:start}
+.win{border:1px solid var(--line);border-radius:18px;background:var(--surface);overflow:hidden;box-shadow:0 14px 30px rgba(28,37,64,.12)}
+.win .bar{display:flex;gap:6px;align-items:center;padding:10px 14px;border-bottom:1px solid var(--line);background:var(--bg);font-size:.8rem;color:var(--muted)}.win .bar i{width:10px;height:10px;border-radius:50%;background:var(--line);display:block}
+.win .body{padding:16px}
+.lanes{display:grid;gap:10px;grid-template-columns:repeat(3,1fr)}
+.lane{border-radius:14px;padding:12px;font-size:.85rem;border:1px solid}.lane h4{margin:0 0 6px;font:700 .85rem "Space Grotesk",system-ui,sans-serif}.lane ul{margin:0;padding-left:16px}.lane li{margin-bottom:4px}
+.lane.ok{background:var(--ok-soft);border-color:var(--ok);color:var(--ink)}.lane.ok h4{color:var(--ok)}.lane.ask{background:var(--warn-soft);border-color:var(--warn)}.lane.ask h4{color:var(--warn)}.lane.stop{background:var(--stop-soft);border-color:var(--stop)}.lane.stop h4{color:var(--stop)}
+.mini{display:flex;gap:12px;flex-wrap:wrap;margin-top:12px;font-size:.82rem;color:var(--muted)}.mini span{display:inline-flex;gap:6px;align-items:center;background:var(--accent-soft);color:var(--ink);border-radius:999px;padding:4px 10px}
+.kid{background:var(--kid-bg);display:grid;grid-template-columns:96px 1fr;min-height:330px}.kid .side{background:var(--surface);border-right:1px solid var(--kid-line);padding:10px 8px;font-size:.72rem;display:grid;align-content:start;gap:6px}
+.kid .side .nc{display:flex;gap:4px;align-items:center;padding:4px 6px;border-radius:8px;background:var(--bg)}.kid .side .nc svg{width:12px;height:12px}.kid .side p{margin:6px 0 0;color:var(--muted)}.kid .side .r{padding:3px 6px;border-radius:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.kid .side .lock{margin-top:auto;display:flex;gap:4px;align-items:center;border:1px solid var(--kid-line);border-radius:8px;padding:4px 6px}.kid .side .lock svg{width:12px;height:12px}
+.kid .main{padding:14px;display:flex;flex-direction:column;gap:12px}.kid .row{display:flex;gap:10px;align-items:flex-start}.kid .row h4{margin:0;font:700 1.05rem "Space Grotesk",system-ui,sans-serif}.kid .row p{margin:2px 0 0;font-size:.88rem}
+.bubble{align-self:flex-end;background:var(--kid-soft);border-radius:16px;padding:8px 12px;font-size:.88rem;max-width:90%}.hint{font-size:.72rem;color:var(--muted);text-align:center;margin:0}
+.composer{margin-top:auto;display:flex;gap:8px;align-items:center;background:var(--surface);border:1px solid var(--kid-line);border-radius:24px;padding:6px 6px 6px 14px;font-size:.85rem;color:var(--muted)}.composer b{margin-left:auto;display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--accent);color:var(--accent-ink)}.composer svg{width:16px;height:16px}
+.grid3{display:grid;gap:16px;grid-template-columns:repeat(3,1fr)}.grid2{display:grid;gap:16px;grid-template-columns:repeat(2,1fr)}
+.feat{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:18px}.feat .pic{margin-bottom:6px}.feat h3{font-size:1.08rem;margin-bottom:4px}.feat p{margin:0;color:var(--muted);font-size:.95rem}
+.flow{display:grid;gap:14px;grid-template-columns:repeat(3,1fr)}.flow>div{border-radius:22px;padding:20px;border:2px solid var(--line);background:var(--surface)}
+.flow .a{background:var(--accent-soft)}.flow .b{background:var(--sun-soft)}.flow .c{background:var(--ok-soft)}.flow h3{font-size:1.1rem;margin:8px 0 4px}.flow p{margin:0;color:var(--ink);opacity:.85}
+.dl{display:grid;gap:22px;grid-template-columns:auto 1fr;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:26px;padding:24px}
+.appicon{width:112px;height:112px;border-radius:26px;background:var(--accent-soft);display:grid;place-items:center;box-shadow:0 10px 22px rgba(36,86,200,.25);border:1px solid var(--line)}.appicon svg{width:78%;height:78%}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px;margin:12px 0}
+.note{background:var(--warn-soft);border:1px solid var(--warn);border-radius:14px;padding:14px;margin:14px 0}.muted{color:var(--muted)}ol li{margin-bottom:6px}small{color:var(--muted)}
+.os{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px}.os h3{font-size:1.05rem;margin-bottom:6px}
+details{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px 16px;margin:8px 0}summary{font-weight:600;cursor:pointer}details p{margin:8px 0 2px;color:var(--muted)}
+footer{border-top:1px solid var(--line);margin-top:28px;padding:22px 0 44px;display:flex;gap:18px;flex-wrap:wrap;align-items:center;color:var(--muted);font-size:.9rem}footer .name{display:flex;gap:8px;align-items:center;color:var(--ink);font-weight:700}
+@media(max-width:820px){.hero,.shots,.dl{grid-template-columns:1fr}.tiles,.steps,.grid3,.grid2,.flow{grid-template-columns:1fr}.band{border-radius:20px;padding:22px 16px}.lanes{grid-template-columns:1fr}header.top nav{margin-left:0}.art{max-width:360px}.kid{grid-template-columns:1fr}.kid .side{display:none}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><g id="logo">
+  <rect x="1" y="1" width="62" height="62" rx="15" fill="#e4eeff"/>
+  <g stroke="#23302a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <!-- thought bubble -->
+    <circle cx="47.5" cy="25.4" r="1.2" fill="#fff" stroke-width="1.4"/>
+    <circle cx="49" cy="19.6" r="2" fill="#fff" stroke-width="1.4"/>
+    <circle cx="51.5" cy="9.5" r="5.6" fill="#fff" stroke-width="1.4"/>
+    <!-- head -->
+    <circle cx="28" cy="40" r="17" fill="#ffd7b0"/>
+    <path d="M11.5 38c-1.5-11 6-18 16.5-18 10 0 17 7 16.5 18-5-2-9-5-11-9-4 5-12 8-22 9z" fill="#5a3a28"/>
+    <path d="M27 20.5c-1-3.5 1.5-5.5 4.5-5" fill="none"/>
+    <!-- eyes looking up at the bubble -->
+    <circle cx="21.5" cy="39" r="3.4" fill="#fff" stroke-width="1.5"/>
+    <circle cx="34.5" cy="39" r="3.4" fill="#fff" stroke-width="1.5"/>
+    <circle cx="22.7" cy="37.6" r="1.7" fill="#23302a" stroke="none"/>
+    <circle cx="35.7" cy="37.6" r="1.7" fill="#23302a" stroke="none"/>
+    <!-- curious brows -->
+    <path d="M17.5 33q4-3 8-1.2M31 31.5q4-3.5 8-1.5" fill="none" stroke-width="1.7"/>
+    <!-- cheeks and a small "hmm" mouth -->
+    <circle cx="16.5" cy="45.5" r="2" fill="#ff8a7a" stroke="none" opacity=".7"/>
+    <circle cx="39.5" cy="45.5" r="2" fill="#ff8a7a" stroke="none" opacity=".7"/>
+    <path d="M25.5 49.5q2.5 1.5 5 0" fill="none" stroke-width="1.7"/>
+    <!-- hand resting on the cheek -->
+    <path d="M38 47c0-4 3-6.5 6.5-6 3.5.5 5 3.5 4 7-1 3.5-4 5.5-7.5 4.5-2-.6-3-2.7-3-5.5z" fill="#ffd7b0"/>
+    <path d="M42 43.5v3M45.5 43v3" fill="none" stroke-width="1.4"/>
+  </g>
+</g><g id="d-speech" class="L"><path  fill="var(--surface)" d="M12 18c0-3 3-6 6-6h28c3 0 6 3 6 6v16c0 3-3 6-6 6H30l-9 9v-9h-3c-3 0-6-3-6-6z" /><path  d="M22 24h20M22 31h12" /></g><g id="d-answer" class="L"><path  fill="var(--surface)" d="M12 18c0-3 3-6 6-6h28c3 0 6 3 6 6v16c0 3-3 6-6 6H30l-9 9v-9h-3c-3 0-6-3-6-6z" /><path  stroke="var(--accent)" stroke-width="4" d="M23 26l6 6 12-13" /></g><g id="d-bulb" class="L"><path  fill="var(--sun)" d="M32 10c-9 0-15 6-15 14 0 5 2 8 5 11 2 2 3 4 3 7h14c0-3 1-5 3-7 3-3 5-6 5-11 0-8-6-14-15-14z" /><path  d="M26 50h12M28 55h8M32 2v3M10 12l3 3M54 12l-3 3" /></g><g id="d-magnifier" class="L"><circle  cx="27" cy="27" r="15" fill="var(--surface)" /><path  stroke-width="5" d="M38 38l16 16" /><path  stroke="var(--accent)" d="M20 27l5 5 9-10" /></g><g id="d-spark" class="L"><path  fill="var(--sun)" d="M32 8l5 16 16 3-12 11 3 16-12-9-12 9 3-16L11 27l16-3z" /></g><g id="d-flag" class="L"><path  d="M18 56V10" /><path  fill="var(--accent)" d="M18 12h30l-8 9 8 9H18" /></g><g id="d-palette" class="L"><path  fill="var(--surface)" d="M32 8C16 8 6 20 6 32c0 11 9 21 20 21 5 0 6-3 4-6-2-4 1-8 6-8h9c6 0 11-4 11-10C56 17 46 8 32 8z" /><circle cx="20" cy="27" r="3.5" fill="#ff8a7a" /><circle cx="30" cy="19" r="3.5" fill="var(--sun)" /><circle cx="42" cy="21" r="3.5" fill="var(--accent)" /><circle cx="47" cy="32" r="3.5" fill="#6aaef2" /></g><g id="d-people" class="L"><circle  cx="24" cy="20" r="7" fill="var(--sun)" /><circle  cx="43" cy="23" r="6" fill="var(--surface)" /><path  d="M10 50c0-9 6-15 14-15s14 6 14 15M36 49c1-7 5-11 10-11s9 4 9 11" /></g><g id="d-shield" class="L"><path  fill="var(--surface)" d="M32 8l20 7v15c0 13-9 22-20 26-11-4-20-13-20-26V15z" /><path  stroke="var(--accent)" stroke-width="4" d="M22 31l7 7 14-15" /></g><g id="d-question" class="L"><path  stroke-width="4" d="M21 22c0-6 5-10 11-10s11 4 11 10c0 5-4 7-8 10-2 2-3 4-3 7" /><circle cx="32" cy="51" r="3" fill="var(--ink)" /></g><g id="d-heart" class="L"><path  fill="#ff8a7a" d="M32 54C12 40 8 28 8 21c0-7 5-12 12-12 5 0 9 3 12 7 3-4 7-7 12-7 7 0 12 5 12 12 0 7-4 19-24 33z" /></g><g id="d-eye" class="L"><path  fill="var(--surface)" d="M6 32c8-14 18-20 26-20s18 6 26 20c-8 14-18 20-26 20S14 46 6 32z" /><circle  cx="32" cy="32" r="9" fill="var(--accent-soft)" /><circle cx="32" cy="32" r="4" fill="var(--ink)" /></g><g id="d-hand" class="L"><path  fill="var(--surface)" d="M20 38V20c0-3 5-3 5 0v10V14c0-3 5-3 5 0v16V16c0-3 5-3 5 0v14V22c0-3 5-3 5 0v18c0 9-5 15-14 15-8 0-13-5-16-13l-3-8c-1-3 3-5 5-2z" /></g><g id="d-pencil" class="L"><path  fill="var(--sun)" d="M12 52l4-14 26-26 10 10-26 26z" /><path  d="M38 16l10 10M12 52l10-4" /></g><g id="d-notebook" class="L"><rect  x="16" y="8" width="34" height="48" rx="4" fill="var(--surface)" /><path  d="M16 18h-5M16 28h-5M16 38h-5M26 20h16M26 28h16M26 36h10" /></g><g id="d-signpost" class="L"><path  d="M30 8v48" /><path  fill="var(--accent-soft)" d="M30 14h20l6 6-6 6H30z" /><path  fill="var(--sun)" d="M30 32H14l-6 6 6 6h16z" /></g><g id="d-book" class="L"><path  fill="var(--surface)" d="M8 16c8-3 17-3 24 2 7-5 16-5 24-2v32c-8-3-17-3-24 2-7-5-16-5-24-2z" /><path  d="M32 18v32" /></g><g id="d-thought" class="L"><path  fill="var(--surface)" d="M16 38c-5 0-8-3-8-8 0-4 3-8 8-8 1-6 6-10 12-10 5 0 9 3 11 7 6-1 12 3 12 9 0 6-4 10-10 10z" /><circle  cx="24" cy="49" r="3" fill="var(--surface)" /><circle  cx="18" cy="57" r="2" fill="var(--surface)" /></g><g id="d-lock" class="L"><rect  x="16" y="28" width="32" height="26" rx="5" fill="var(--sun)" /><path  d="M22 28v-6c0-6 4-10 10-10s10 4 10 10v6M32 41v6" /><circle cx="32" cy="39" r="3" fill="var(--ink)" /></g><g id="d-scales" class="L"><path  d="M32 10v40M20 54h24M12 20h40" /><path  fill="var(--sun-soft)" d="M12 20l-6 14c0 4 12 4 12 0zM52 20l-6 14c0 4 12 4 12 0z" /></g><g id="d-friend" class="L"><circle  cx="32" cy="32" r="22" fill="var(--sun)" /><circle cx="24" cy="28" r="2.5" fill="var(--ink)" /><circle cx="40" cy="28" r="2.5" fill="var(--ink)" /><path  d="M22 38c4 7 16 7 20 0" /></g><g id="d-docs" class="L"><rect  x="12" y="16" width="26" height="34" rx="3" fill="var(--surface)" /><rect  x="26" y="10" width="26" height="34" rx="3" fill="var(--sun-soft)" /><path  d="M32 20h14M32 27h14M32 34h9" /></g></defs></svg>
+<div class="wrap">
+<header class="top"><a class="name" href="#top"><svg width="44" height="44" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><use href="#logo"/></svg>ThinkFirst</a>
+<nav aria-label="Main"><a href="#how">How it works</a><a href="#privacy">Privacy</a><a href="#faq">Questions</a><a class="cta" href="#download">Download</a></nav></header>
+
+<main id="top">
+<div class="hero">
+<div>
+<span class="badge"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3l2.2 5.6L20 11l-5.8 2.4L12 19l-2.2-5.6L4 11l5.8-2.4z"/></svg>Free beta</span>
+<h1>Decide together what <em>AI may do</em> for your child.</h1>
+<p class="lead">ThinkFirst turns a family conversation into clear rules. The app enforces them in its own chat, so your child gets help with their thinking, not a replacement for it.</p>
+<a class="btn" href="#download"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 4v11"/><path d="M7 11l5 5 5-5"/><path d="M5 20h14"/></svg>Download the beta</a><a class="btn ghost" href="#how">See how it works</a>
+<p class="muted"><small>For children aged 6 to 18, with guidance for parents of younger children too. Mac and Windows.</small></p>
+</div>
+<div class="art" aria-hidden="true">
+<svg class="bg" viewBox="0 0 470 430" focusable="false"><path d="M60 215C40 120 110 40 230 36s200 60 205 165-60 190-190 192S78 310 60 215z" fill="var(--blob-sky)"/><path d="M300 40c60-20 130 20 128 90-1 50-55 80-100 62S250 70 300 40z" fill="var(--blob-sun)" opacity=".85"/><path d="M20 330c10-50 70-70 110-40s30 90-20 105S10 380 20 330z" fill="var(--blob-coral)" opacity=".9"/></svg>
+<svg class="face" viewBox="0 0 64 64" focusable="false"><use href="#logo"/></svg>
+<div class="chip c1"><svg viewBox="0 0 64 64"><use href="#d-bulb"/></svg></div>
+<div class="chip c2"><svg viewBox="0 0 64 64"><use href="#d-question"/></svg></div>
+<div class="chip c3"><svg viewBox="0 0 64 64"><use href="#d-notebook"/></svg></div>
+<div class="chip c4"><svg viewBox="0 0 64 64"><use href="#d-shield"/></svg></div>
+</div>
+</div>
+
+<section>
+<h2>One card for each situation</h2>
+<p class="intro">You choose where AI may help, then decide the rules for that situation. Your child sees the same pictures and words you do.</p>
+<div class="tiles">
+<div class="tile"><svg class="pic" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><path d="M10 30c-1-13 9-22 22-21s23 9 22 23-9 22-23 21S11 44 10 30z" fill="var(--blob-sky)"/><use href="#d-notebook"/></svg><div><b>Homework and schoolwork</b><span>Learning a concept or finishing an assignment.</span></div></div>
+<div class="tile"><svg class="pic" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><path d="M8 34c0-14 8-25 23-25s25 10 24 24-10 22-24 22S8 47 8 34z" fill="var(--blob-sun)"/><use href="#d-palette"/></svg><div><b>Creative projects</b><span>Stories, drawings, songs, builds.</span></div></div>
+<div class="tile"><svg class="pic" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><path d="M11 26c3-11 14-17 26-15s19 12 17 25-12 19-25 18S8 38 11 26z" fill="var(--blob-green)"/><use href="#d-magnifier"/></svg><div><b>Finding out information</b><span>Questions about the world, projects, things they are curious about.</span></div></div>
+</div>
+</section>
+
+<section id="how">
+<div class="band">
+<h2>How it works</h2>
+<p class="intro">About ten minutes to set up. You do it with your child, so the rules are theirs too.</p>
+<ol class="steps">
+<li><svg class="pic lg" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><path d="M8 34c0-14 8-25 23-25s25 10 24 24-10 22-24 22S8 47 8 34z" fill="var(--blob-sky)"/><use href="#d-signpost"/></svg><h3>Pick a situation</h3><p>Homework, creative projects, or finding out information. The app suggests rules for it.</p></li>
+<li><svg class="pic lg" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><path d="M10 30c-1-13 9-22 22-21s23 9 22 23-9 22-23 21S11 44 10 30z" fill="var(--blob-sun)"/><use href="#d-people"/></svg><h3>Decide together</h3><p>What the AI may do, what it should ask a grown-up first, and when it must stop. Edit every line in your own words.</p></li>
+<li><svg class="pic lg" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><path d="M11 26c3-11 14-17 26-15s19 12 17 25-12 19-25 18S8 38 11 26z" fill="var(--blob-green)"/><use href="#d-shield"/></svg><h3>Your child chats, under your rules</h3><p>The app checks the rules itself, outside the AI, every time. You review how it is going every few weeks.</p></li>
+</ol>
+</div>
+</section>
+
+<section>
+<h2>See it in the app</h2>
+<p class="intro">A parent sets the rules once. The child gets a calm chat that starts with their own thinking.</p>
+<div class="shots">
+<div class="win" role="img" aria-label="Parent screen: set the rules together, with three columns: OK on your own, Ask a parent first, Stop and come and tell us">
+<div class="bar"><i></i><i></i><i></i><span>Homework and schoolwork &middot; example card</span></div>
+<div class="body">
+<h3 style="font-size:1.1rem;margin-bottom:10px">Set the rules together</h3>
+<div class="lanes">
+<div class="lane ok"><h4>OK on your own</h4><ul><li>Explain an idea in different words</li><li>Check your own answer</li></ul></div>
+<div class="lane ask"><h4>Ask a parent first</h4><ul><li>Anything that needs a yes each time</li></ul></div>
+<div class="lane stop"><h4>Stop and come and tell us</h4><ul><li>Sharing private details</li><li>Anything that worries them</li></ul></div>
+</div>
+<div class="mini"><span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 20l1-4L16.5 4.5a2.1 2.1 0 013 3L8 19z"/><path d="M14.5 6.5l3 3"/></svg>Chat opens after their own idea</span><span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4h6v3H9z"/><path d="M8.5 13l2.5 2.5 4.5-5"/></svg>Review every few weeks</span><span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/><path d="M12 15v2"/></svg>PIN to loosen</span></div>
+</div>
+</div>
+<div class="win kid-theme" role="img" aria-label="Child screen: What do you think? Type your idea first, then we can talk about it">
+<div class="kid">
+<div class="side"><div class="nc"><svg class="ic" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>New chat</div><p>Recents</p><div class="r">Why is the sky blue</div><div class="r">Fractions</div><div class="lock"><svg class="ic" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/></svg>Grown-up mode</div></div>
+<div class="main">
+<div class="row"><svg width="32" height="32" viewBox="0 0 64 64" aria-hidden="true"><use href="#logo"/></svg><div><h4>What do you think?</h4><p>Type your idea about homework first. Then we can talk about it.</p></div></div>
+<div class="bubble">I think the sky is blue because of the sun?</div>
+<div class="row"><svg width="32" height="32" viewBox="0 0 64 64" aria-hidden="true"><use href="#logo"/></svg><div><p>Good start! What colour is sunlight when it comes through a prism?</p></div></div>
+<div class="composer">Type your message<b><svg class="ic" viewBox="0 0 24 24"><path d="M12 19V5"/><path d="M6 11l6-6 6 6"/></svg></b></div>
+<p class="hint">Answers can be wrong. Check important things with a grown-up.</p>
+</div>
+</div>
+</div>
+</div>
+<p class="muted"><small>Screens are simplified examples. The words in the chat are an illustration, not a real reply.</small></p>
+</section>
+
+<section>
+<h2>Made for parents, kind to children</h2>
+<div class="grid3">
+<div class="feat"><svg class="pic" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><path d="M10 30c-1-13 9-22 22-21s23 9 22 23-9 22-23 21S11 44 10 30z" fill="var(--blob-sky)"/><use href="#d-book"/></svg><h3>Guidance by age</h3><p>Plain notes on where AI may help or hinder, for every age from 0. The chat itself is for ages 6 to 18.</p></div>
+<div class="feat"><svg class="pic" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><path d="M8 34c0-14 8-25 23-25s25 10 24 24-10 22-24 22S8 47 8 34z" fill="var(--blob-sun)"/><use href="#d-lock"/></svg><h3>You stay in charge</h3><p>A PIN guards the grown-up screens. Loosening a rule always needs it.</p></div>
+<div class="feat"><svg class="pic" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><path d="M11 26c3-11 14-17 26-15s19 12 17 25-12 19-25 18S8 38 11 26z" fill="var(--blob-coral)"/><use href="#d-heart"/></svg><h3>No scores, no labels</h3><p>ThinkFirst never rates or labels your child. A pause says what kind of topic came up, and you decide what to talk about.</p></div>
+<div class="feat"><svg class="pic" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><path d="M10 30c-1-13 9-22 22-21s23 9 22 23-9 22-23 21S11 44 10 30z" fill="var(--blob-green)"/><use href="#d-eye"/></svg><h3>Chats stay private</h3><p>Saving chats is off. If you turn it on, your child is told you can read them.</p></div>
+<div class="feat"><svg class="pic" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><path d="M8 34c0-14 8-25 23-25s25 10 24 24-10 22-24 22S8 47 8 34z" fill="var(--blob-sky)"/><use href="#d-hand"/></svg><h3>Worried about something?</h3><p>The app has a help page for when something worries you, and a card you can print for the fridge.</p></div>
+<div class="feat"><svg class="pic" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><path d="M11 26c3-11 14-17 26-15s19 12 17 25-12 19-25 18S8 38 11 26z" fill="var(--blob-sun)"/><use href="#d-speech"/></svg><h3>Plain language</h3><p>Short, calm wording, in English for now. Hindi is planned.</p></div>
+</div>
+</section>
+
+<section id="privacy">
+<h2>Your family&rsquo;s details stay with you</h2>
+<p class="intro">Everything about your child lives on your own computer. A few things leave it, and <a href="privacy.html">the privacy page</a> names each one.</p>
+<div class="flow">
+<div class="a"><svg class="pic" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><path d="M10 30c-1-13 9-22 22-21s23 9 22 23-9 22-23 21S11 44 10 30z" fill="var(--blob-sky)"/><use href="#d-lock"/></svg><h3>On your computer</h3><p>Your child&rsquo;s name, the rules, notes and pauses. We never receive them.</p></div>
+<div class="b"><svg class="pic" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><path d="M8 34c0-14 8-25 23-25s25 10 24 24-10 22-24 22S8 47 8 34z" fill="var(--blob-sun)"/><use href="#d-docs"/></svg><h3>To ThinkFirst</h3><p>Your email (checked with a code) and a once-a-day open count. Never your child&rsquo;s details or chats.</p></div>
+<div class="c"><svg class="pic" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><path d="M11 26c3-11 14-17 26-15s19 12 17 25-12 19-25 18S8 38 11 26z" fill="var(--blob-green)"/><use href="#d-thought"/></svg><h3>To OpenAI, if you turn the chat on</h3><p>What your child types goes to OpenAI through your own Codex account. It is off until you agree, with your PIN.</p></div>
+</div>
+<p class="muted"><small>No advertising and no tracking tools.</small></p>
+</section>
+
+<section id="download">
+<h2>Download the beta</h2>
+<p class="intro">We are testing with a few families before opening it up.</p>
+<div class="dl">
+<div class="appicon"><svg viewBox="0 0 64 64" aria-hidden="true"><use href="#logo"/></svg></div>
+<div>
+<h3 style="font-size:1.3rem">ThinkFirst for Mac and Windows</h3>
+<p class="muted" style="margin:4px 0 8px">Pick your computer. The chat uses your own Codex account (part of ChatGPT), which you sign in to from inside the app, and it counts against that plan.</p>
+<div data-group="app"></div>
+</div>
+</div>
+<p class="muted"><small>You need a Mac or a Windows PC, an internet connection for the chat, and a ChatGPT account whose plan includes Codex. A free account may run out quickly; the app tells you when that happens.</small></p>
+
+<h3 id="first-open" style="margin-top:26px">Opening it for the first time</h3>
+<div class="note"><b>Your computer will warn you the first time.</b> The app is not signed with a paid developer certificate, so macOS and Windows ask you to confirm. It is a one-time step.</div>
+<div class="grid2">
+<div class="os"><h3>On a Mac</h3><ol>
+<li>Unzip the download (double-click the zip). Drag the app into your Applications folder, or leave it where it is.</li>
+<li>Double-click the app. A message says it cannot be checked for malicious software. Click <b>Done</b> (not &ldquo;Move to Trash&rdquo;).</li>
+<li>Open <b>System Settings</b>, then <b>Privacy &amp; Security</b>. Scroll down to the message about the app and click <b>Open Anyway</b>. Enter your Mac password.</li>
+<li>On an older Mac: right-click the app, choose <b>Open</b>, then click <b>Open</b> in the box.</li></ol></div>
+<div class="os"><h3>On Windows</h3><ol>
+<li>Unzip the download (right-click it, then <b>Extract All</b>).</li>
+<li>Open the folder and double-click the installer or the app.</li>
+<li>If Windows says &ldquo;Windows protected your PC&rdquo;, click <b>More info</b>, then <b>Run anyway</b>.</li></ol></div>
+</div>
+</section>
+
+<section id="faq">
+<h2>Questions</h2>
+<details><summary>Does ThinkFirst make the AI safe?</summary><p>No. It is a family rule that the app enforces in its own chat. It is not a guarantee of safety. If something worries you, the app has a help page, and you can always talk to your child.</p></details>
+<details><summary>What does it cost?</summary><p>ThinkFirst is free. The chat uses your own Codex allowance, so it counts against your ChatGPT plan.</p></details>
+<details><summary>Can I read my child&rsquo;s chats?</summary><p>Only if you turn saving on, and then your child is told. By default nothing they type is saved.</p></details>
+<details><summary>Why does it ask for my email?</summary><p>So we can tell you about updates and learn how many families use it. You enter it once and confirm it with a code. We never receive your child&rsquo;s details.</p></details>
+<details><summary>Can it work without an internet connection?</summary><p>The first sign-in code needs the internet. After that you can set up cards and read the guidance offline. The chat needs the internet, because the replies come from OpenAI through your account.</p></details>
+<details><summary>What if I change my mind about a rule?</summary><p>You review each card every few weeks. You can tighten a rule any time. Loosening one needs your PIN.</p></details>
+<details><summary>How do I remove it?</summary><p>In the app, Settings has Delete all data. Then drag the app to the Bin, or uninstall it on Windows from Settings, Apps.</p></details>
+</section>
+
+<section id="credits">
+<h2>Credits</h2>
+<p>The notes on where AI may help or hinder come from the <a href="https://compass.gse.harvard.edu/explore/" rel="noopener noreferrer">Compass Collaborative, Harvard Graduate School of Education</a>, shown word for word and labelled as hypotheses. This app is not made, reviewed or endorsed by Harvard or the Compass Collaborative.</p>
+<p>The chat runs on your own Codex account, from OpenAI. What your child types is sent to OpenAI under your account.</p>
+<p class="muted"><small>This is a family rule enforced by the app. It is not a safety guarantee. If something worries you, the app has a help page, and you can always talk to your child.</small></p>
+</section>
+</main>
+<footer><span class="name"><svg width="28" height="28" viewBox="0 0 64 64" aria-hidden="true"><use href="#logo"/></svg>ThinkFirst</span><a href="privacy.html">Privacy</a><a href="#credits">Credits</a><span>A free beta</span></footer>
+</div>
+<script>
+(function(){
+  var sb=null;fetch("supabase.json").then(function(r){return r.json();}).then(function(c){if(c&&c.url&&c.anon_key)sb=c;}).catch(function(){});
+  function counted(g,k){if(!sb)return;try{fetch(sb.url.replace(/\/$/,"")+"/rest/v1/downloads",{method:"POST",keepalive:true,headers:Object.assign({apikey:sb.anon_key,"content-type":"application/json",prefer:"return=minimal"},sb.anon_key.indexOf("eyJ")===0?{authorization:"Bearer "+sb.anon_key}:{}),body:JSON.stringify({variant:g,platform:k})}).catch(function(){});}catch(e){}}
+  var ICON='<svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 4v11"/><path d="M7 11l5 5 5-5"/><path d="M5 20h14"/></svg>';var label={"macos-arm64":"Mac (Apple chip)","macos-x64":"Mac (Intel chip)","windows-x64":"Windows"};
+  fetch("downloads.json").then(function(r){return r.json();}).then(function(d){
+    document.querySelectorAll("[data-group]").forEach(function(box){
+      var g=d[box.getAttribute("data-group")]||{};
+      Object.keys(label).forEach(function(k){
+        var e=g[k]||{};var a=document.createElement("a");a.className="btn";a.innerHTML=ICON;a.appendChild(document.createTextNode(label[k]+(e.size?" ("+e.size+")":"")));
+        if(e.url){a.href=e.url;a.addEventListener("click",function(){counted(box.getAttribute("data-group"),k);});}else{a.setAttribute("aria-disabled","true");a.href="#";a.innerHTML=ICON;a.appendChild(document.createTextNode(label[k]+": coming soon"));}
+        box.appendChild(a);
+        if(e.sha256){var s=document.createElement("div");s.innerHTML="<small>sha256: "+e.sha256+"</small>";box.appendChild(s);}
+      });
+    });
+  }).catch(function(){});
+})();
+</script>
+</body></html>

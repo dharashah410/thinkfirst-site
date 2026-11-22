@@ -1,0 +1,5 @@
+{
+  "note": "Public values only. The key is the project's public (publishable or anon) key, which the tables allow to insert rows only. Never put a secret or service_role key here. See docs/supabase.md.",
+  "url": "https://rzmbnvajumrbgogffiel.supabase.co",
+  "anon_key": "sb_publishable_jElpLrSjvW89KqqIPXU29Q_NtqdZfsc"
+}

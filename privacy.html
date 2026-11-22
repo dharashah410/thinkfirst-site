@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ThinkFirst: Privacy</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta name="description" content="What ThinkFirst keeps on your computer, what it sends, and to whom.">
+<style>
+:root{--bg:#f4f8ff;--surface:#fff;--ink:#1c2540;--muted:#46557a;--line:#ccd8ee;--accent:#2456c8;--accent-ink:#fff;--accent-soft:#e4eeff;--sun:#ffb800;--sun-ink:#2b2100;--sun-soft:#fff0c4;--sky-soft:#dbe8ff;--coral-soft:#ffe1d9;--blob-sky:#c4d8ff;--blob-sun:#ffe08a;--blob-green:#d3d9ff;--blob-coral:#ffc6b8;--ok:#1b7a43;--ok-soft:#dff3e5;--warn:#8a5600;--warn-soft:#fff0c9;--stop:#a82a2a;--stop-soft:#fbe2df;--focus:#1d4ed8;--kid-bg:#eaf2ff;--kid-line:#a9bde6;--kid-soft:#d6e4ff}
+@media (prefers-color-scheme:dark){:root{--bg:#0d1426;--surface:#151e36;--ink:#e6ecfb;--muted:#a3b0d1;--line:#2a3a63;--accent:#7ea2ff;--accent-ink:#0a1330;--accent-soft:#1a2a55;--sun:#ffc533;--sun-soft:#3a3012;--sky-soft:#14284a;--coral-soft:#3d1f1a;--blob-sky:#2a4a9a;--blob-sun:#6b5514;--blob-green:#3a3f8f;--blob-coral:#6b3228;--ok:#74d19b;--ok-soft:#173226;--warn:#e7b04d;--warn-soft:#352a14;--stop:#f29393;--stop-soft:#3b1e1e;--focus:#ffc533;--kid-bg:#0a1633;--kid-line:#34508c;--kid-soft:#1f3366;color-scheme:dark}}
+*{box-sizing:border-box}a[href],button:not(:disabled){cursor:pointer}a[aria-disabled="true"]{cursor:default}
+html{scroll-behavior:smooth}@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important}}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 Inter,system-ui,-apple-system,"Segoe UI",sans-serif;overflow-x:hidden}
+h1,h2,h3{font-family:"Space Grotesk",system-ui,sans-serif;line-height:1.15;margin:0}a{color:var(--accent)}:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:4px}
+.L{fill:none;stroke:var(--ink);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+svg.ic{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+header.top{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:14px 0;position:relative;z-index:2}
+header.top .name{font:700 1.25rem "Space Grotesk",system-ui,sans-serif;display:flex;align-items:center;gap:10px;color:var(--ink);text-decoration:none}
+header.top nav{margin-left:auto;display:flex;gap:6px;flex-wrap:wrap;align-items:center}header.top nav a{color:var(--ink);text-decoration:none;font-weight:500;padding:8px 12px;border-radius:999px}header.top nav a:hover{background:var(--accent-soft)}
+header.top nav a.cta{background:var(--accent);color:var(--accent-ink);font-weight:600}header.top nav a.cta:hover{background:var(--accent)}
+.btn{display:inline-flex;align-items:center;gap:8px;margin:4px 8px 4px 0;min-height:46px;padding:10px 20px;border-radius:12px;border:1px solid var(--accent);background:var(--accent);color:var(--accent-ink);text-decoration:none;font-weight:600}
+.btn.sun{background:var(--sun);border-color:var(--sun);color:var(--sun-ink)}.btn.ghost{background:var(--surface);color:var(--accent)}
+.btn[aria-disabled="true"]{background:transparent;color:var(--muted);border-color:var(--line);pointer-events:none}
+.badge{display:inline-flex;align-items:center;gap:6px;background:var(--sun-soft);border:1px solid var(--sun);border-radius:999px;padding:4px 14px;font-size:.85rem;font-weight:600;margin-bottom:16px}
+.hero{position:relative;padding:28px 0 36px;display:grid;gap:20px;grid-template-columns:1.05fr .95fr;align-items:center}
+.hero h1{font-size:clamp(2.2rem,5.4vw,3.4rem);letter-spacing:-.015em}.hero h1 em{font-style:normal;color:var(--accent);background:linear-gradient(transparent 62%,var(--sun) 62%,var(--sun) 92%,transparent 92%)}
+.hero p.lead{font-size:1.15rem;color:var(--muted);margin:16px 0 22px;max-width:30em}
+.art{position:relative;aspect-ratio:1/.92;width:100%;max-width:470px;margin:0 auto}.art svg.bg{position:absolute;inset:0;width:100%;height:100%}
+.art .face{position:absolute;left:50%;top:50%;width:46%;transform:translate(-50%,-50%);filter:drop-shadow(0 10px 18px rgba(36,86,200,.25))}
+.chip{position:absolute;display:grid;place-items:center;width:20%;aspect-ratio:1;border-radius:22px;background:var(--surface);border:2px solid var(--line);box-shadow:0 6px 14px rgba(28,37,64,.12);animation:bob 5s ease-in-out infinite}
+.chip svg{width:78%;height:78%}.chip.c1{left:3%;top:8%}.chip.c2{right:2%;top:2%;animation-delay:-1.5s}.chip.c3{left:0;bottom:12%;animation-delay:-3s}.chip.c4{right:4%;bottom:6%;animation-delay:-2.2s}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-9px) rotate(2deg)}}
+section{padding:36px 0}section>.wrap>h2,section>h2{font-size:clamp(1.55rem,3.4vw,2.1rem);margin-bottom:8px}section .intro{color:var(--muted);margin:0 0 22px;max-width:40em;font-size:1.05rem}
+.band{background:var(--sky-soft);border-radius:28px;margin:0 -8px;padding:32px 28px}
+.pic{width:64px;height:64px;flex:none}.pic.lg{width:84px;height:84px}
+.tiles{display:grid;gap:16px;grid-template-columns:repeat(3,1fr)}
+.tile{display:flex;gap:16px;align-items:center;background:var(--surface);border:2px solid var(--line);border-radius:20px;padding:16px}.tile b{display:block;font-size:1.05rem;line-height:1.3}.tile span{color:var(--muted);font-size:.93rem}
+.steps{display:grid;gap:16px;grid-template-columns:repeat(3,1fr);list-style:none;margin:0;padding:0;counter-reset:s}
+.steps li{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:22px 20px;counter-increment:s}
+.steps li::after{content:counter(s);position:absolute;right:16px;top:14px;display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:var(--accent);color:var(--accent-ink);font-weight:700}
+.steps h3{font-size:1.15rem;margin:10px 0 4px}.steps p{margin:0;color:var(--muted)}
+.shots{display:grid;gap:22px;grid-template-columns:1.1fr .9fr;align-items:start}
+.win{border:1px solid var(--line);border-radius:18px;background:var(--surface);overflow:hidden;box-shadow:0 14px 30px rgba(28,37,64,.12)}
+.win .bar{display:flex;gap:6px;align-items:center;padding:10px 14px;border-bottom:1px solid var(--line);background:var(--bg);font-size:.8rem;color:var(--muted)}.win .bar i{width:10px;height:10px;border-radius:50%;background:var(--line);display:block}
+.win .body{padding:16px}
+.lanes{display:grid;gap:10px;grid-template-columns:repeat(3,1fr)}
+.lane{border-radius:14px;padding:12px;font-size:.85rem;border:1px solid}.lane h4{margin:0 0 6px;font:700 .85rem "Space Grotesk",system-ui,sans-serif}.lane ul{margin:0;padding-left:16px}.lane li{margin-bottom:4px}
+.lane.ok{background:var(--ok-soft);border-color:var(--ok);color:var(--ink)}.lane.ok h4{color:var(--ok)}.lane.ask{background:var(--warn-soft);border-color:var(--warn)}.lane.ask h4{color:var(--warn)}.lane.stop{background:var(--stop-soft);border-color:var(--stop)}.lane.stop h4{color:var(--stop)}
+.mini{display:flex;gap:12px;flex-wrap:wrap;margin-top:12px;font-size:.82rem;color:var(--muted)}.mini span{display:inline-flex;gap:6px;align-items:center;background:var(--accent-soft);color:var(--ink);border-radius:999px;padding:4px 10px}
+.kid{background:var(--kid-bg);display:grid;grid-template-columns:96px 1fr;min-height:330px}.kid .side{background:var(--surface);border-right:1px solid var(--kid-line);padding:10px 8px;font-size:.72rem;display:grid;align-content:start;gap:6px}
+.kid .side .nc{display:flex;gap:4px;align-items:center;padding:4px 6px;border-radius:8px;background:var(--bg)}.kid .side .nc svg{width:12px;height:12px}.kid .side p{margin:6px 0 0;color:var(--muted)}.kid .side .r{padding:3px 6px;border-radius:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.kid .side .lock{margin-top:auto;display:flex;gap:4px;align-items:center;border:1px solid var(--kid-line);border-radius:8px;padding:4px 6px}.kid .side .lock svg{width:12px;height:12px}
+.kid .main{padding:14px;display:flex;flex-direction:column;gap:12px}.kid .row{display:flex;gap:10px;align-items:flex-start}.kid .row h4{margin:0;font:700 1.05rem "Space Grotesk",system-ui,sans-serif}.kid .row p{margin:2px 0 0;font-size:.88rem}
+.bubble{align-self:flex-end;background:var(--kid-soft);border-radius:16px;padding:8px 12px;font-size:.88rem;max-width:90%}.hint{font-size:.72rem;color:var(--muted);text-align:center;margin:0}
+.composer{margin-top:auto;display:flex;gap:8px;align-items:center;background:var(--surface);border:1px solid var(--kid-line);border-radius:24px;padding:6px 6px 6px 14px;font-size:.85rem;color:var(--muted)}.composer b{margin-left:auto;display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--accent);color:var(--accent-ink)}.composer svg{width:16px;height:16px}
+.grid3{display:grid;gap:16px;grid-template-columns:repeat(3,1fr)}.grid2{display:grid;gap:16px;grid-template-columns:repeat(2,1fr)}
+.feat{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:18px}.feat .pic{margin-bottom:6px}.feat h3{font-size:1.08rem;margin-bottom:4px}.feat p{margin:0;color:var(--muted);font-size:.95rem}
+.flow{display:grid;gap:14px;grid-template-columns:repeat(3,1fr)}.flow>div{border-radius:22px;padding:20px;border:2px solid var(--line);background:var(--surface)}
+.flow .a{background:var(--accent-soft)}.flow .b{background:var(--sun-soft)}.flow .c{background:var(--ok-soft)}.flow h3{font-size:1.1rem;margin:8px 0 4px}.flow p{margin:0;color:var(--ink);opacity:.85}
+.dl{display:grid;gap:22px;grid-template-columns:auto 1fr;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:26px;padding:24px}
+.appicon{width:112px;height:112px;border-radius:26px;background:var(--accent-soft);display:grid;place-items:center;box-shadow:0 10px 22px rgba(36,86,200,.25);border:1px solid var(--line)}.appicon svg{width:78%;height:78%}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px;margin:12px 0}
+.note{background:var(--warn-soft);border:1px solid var(--warn);border-radius:14px;padding:14px;margin:14px 0}.muted{color:var(--muted)}ol li{margin-bottom:6px}small{color:var(--muted)}
+.os{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px}.os h3{font-size:1.05rem;margin-bottom:6px}
+details{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px 16px;margin:8px 0}summary{font-weight:600;cursor:pointer}details p{margin:8px 0 2px;color:var(--muted)}
+footer{border-top:1px solid var(--line);margin-top:28px;padding:22px 0 44px;display:flex;gap:18px;flex-wrap:wrap;align-items:center;color:var(--muted);font-size:.9rem}footer .name{display:flex;gap:8px;align-items:center;color:var(--ink);font-weight:700}
+@media(max-width:820px){.hero,.shots,.dl{grid-template-columns:1fr}.tiles,.steps,.grid3,.grid2,.flow{grid-template-columns:1fr}.band{border-radius:20px;padding:22px 16px}.lanes{grid-template-columns:1fr}header.top nav{margin-left:0}.art{max-width:360px}.kid{grid-template-columns:1fr}.kid .side{display:none}}
+</style>
+</head>
+<body><div class="wrap">
+<header class="top"><a class="name" href="index.html">ThinkFirst</a><nav aria-label="Main"><a href="index.html">&larr; Back to the home page</a></nav></header>
+<main style="padding:12px 0 40px">
+<h1>Privacy</h1>
+<p>ThinkFirst keeps your family&rsquo;s details on your own computer. A few things leave it, and this page names each one.</p>
+<h2 id="stays">What stays on your computer</h2>
+<p>These are saved in ThinkFirst&rsquo;s own folder on your computer. We never receive them.</p>
+<ul><li>Your child&rsquo;s nickname, age and the names or schools you asked the app to keep private.</li><li>The rules you set for each situation, your co-sign, and your reviews.</li><li>The short notes your child writes after using the chat, and the pauses the app recorded (a pause says which kind of topic came up, not the words).</li><li>Your PIN, saved in a scrambled form, so it cannot be read back.</li><li>Saved chats, only if you turn saving on. It is off by default. If you turn it on, your child is told you can read their chats. You can delete them at any time.</li></ul>
+<h2 id="thinkfirst">What is sent to ThinkFirst</h2>
+<p>ThinkFirst is free. In return we ask for a little information, kept on Supabase, a hosted database service.</p>
+<ul><li>Your email address, once you ask for a sign-in code. We use it to send you the code, tell you about updates, and learn how many families use the app. The code is sent through Resend, an email delivery service, so your address passes through it.</li><li>Once a day, when you open the app: a random number made on your computer (it is not made from your name or email and is not linked to your email), the date, the app version, and whether your computer is a Mac or Windows PC. This counts how many installs are in use.</li><li>On the download page: which version you clicked, so we can count downloads.</li></ul>
+<h2 id="never">What is never sent to ThinkFirst</h2>
+<p>Your child&rsquo;s name, age, rules, notes, pauses, or anything they type. The app has no advertising and no tracking tools.</p>
+<h2 id="openai">What is sent to OpenAI</h2>
+<p>The chat is answered by Codex, which is OpenAI&rsquo;s product, using your own ChatGPT account. The chat is off until you agree to this in Settings with your PIN.</p>
+<p>When the chat is on, what your child types goes to OpenAI together with your rules for that situation and the earlier messages of that chat. Their reply comes back to the app. This uses your account and counts against your Codex plan. OpenAI&rsquo;s own terms and privacy policy apply to it, and they set age rules. Please read them before you turn the chat on.</p>
+<p>Before anything is sent, the app checks the message for the stop topics and for the names you asked it to keep private. A message that matches is not sent. The app asks Codex not to keep a record of the chat on your computer, and it blocks Codex from using any tools, files or the internet.</p>
+<h2 id="control">Your choices</h2>
+<ul><li>Settings &gt; Delete all data removes your cards, notes, saved chats and PIN from this computer. It cannot be undone, so export first if you want a copy.</li><li>Settings &gt; Export all data gives you a file of what the app holds.</li><li>To sign out of OpenAI for ThinkFirst, remove the chat connection in Settings, or sign out of your ChatGPT account.</li><li>To have your email removed from ThinkFirst, write to us. Deleting data in the app does not remove it. The daily counts hold no email and are not linked to one.</li></ul>
+<h2 id="other">Good to know</h2>
+<ul><li>The research notes in the app come from the Compass Collaborative. Reading them sends nothing anywhere.</li><li>The download page is on an ordinary web host, which may keep the usual server records of visits.</li><li>ThinkFirst is a family rule that the app enforces. It is not a guarantee of safety. If something worries you, the app has a help page, and you can always talk to your child.</li><li>If this page changes in a way that matters, the new version will be in the app and on the download page, with a new date.</li></ul>
+<p class="card">Questions, or a request to remove your email: [Contact email to be added before release]</p>
+<p class="muted"><small>Updated 2026-11-21. Generated from the same text as the app&rsquo;s About screen.</small></p>
+</main></div></body>
+</html>
